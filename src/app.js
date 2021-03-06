@@ -1,9 +1,9 @@
-import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-import routers from "./app/routers";
-import middlewares from "./app/middlewares";
-import "./database";
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import routers from './app/routers';
+import middlewares from './app/middlewares';
+import './database';
 
 class App {
   constructor() {
@@ -19,7 +19,7 @@ class App {
     this.server.use(cors());
 
     dotenv.config({
-      path: "./../.env",
+      path: './../.env',
     });
   }
 

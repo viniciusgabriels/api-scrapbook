@@ -1,22 +1,55 @@
+import User from '../models/User';
+
 class UserController {
-  index(request, response) {
-    //
+  async index(request, response) {
+    const result = await User.findAll();
+    return response.json(result);
   }
 
-  show(request, response) {
-    //
+  async show(request, response) {
+    const { id } = request.params;
+    const user = await User.findByPk(id);
+
+    return response.json(user);
   }
 
-  store(request, response) {
-    //
+  async store(request, response) {
+    const { name, email } = request.body;
+
+    const user = await User.create({
+      name,
+      email,
+    });
+
+    return response.json(user);
   }
 
-  update(request, response) {
-    //
+  async update(request, response) {
+    const { id } = request.params;
+    const { name, email } = request.body;
+
+    const user = await User.update(
+      {
+        name,
+        email,
+      },
+      {
+        where: {
+          id,
+        },
+        returning: true,
+      }
+    );
+
+    return response.json(user);
   }
 
-  delete(request, response) {
-    //
+  async delete(request, response) {
+    const { id } = request.params;
+    const user = await User.findByPk(id);
+    await user.destroy();
+
+    response.sendStatus(202);
   }
 }
 
