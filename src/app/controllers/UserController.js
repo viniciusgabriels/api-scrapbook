@@ -1,4 +1,5 @@
 import User from '../models/User';
+import Post from '../models/Post';
 
 class UserController {
   async index(request, response) {
@@ -47,6 +48,14 @@ class UserController {
   async delete(request, response) {
     const { id } = request.params;
     const user = await User.findByPk(id);
+    const post = await Post.findAll;
+
+    await post.destroy({
+      where: {
+        user_id: id,
+      },
+    });
+
     await user.destroy();
 
     response.sendStatus(202);

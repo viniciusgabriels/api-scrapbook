@@ -32,7 +32,7 @@ class User extends Model {
   static associate(models) {
     this.hasMany(models.Post, {
       as: 'post',
-      foreignKey: 'post_id',
+      foreignKey: 'user_id',
     });
   }
 }
