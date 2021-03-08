@@ -48,9 +48,8 @@ class UserController {
   async delete(request, response) {
     const { id } = request.params;
     const user = await User.findByPk(id);
-    const post = await Post.findAll;
 
-    await post.destroy({
+    await Post.destroy({
       where: {
         user_id: id,
       },
